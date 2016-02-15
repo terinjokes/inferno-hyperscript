@@ -18,8 +18,8 @@ var template = h.t(function(whom) {
   ])
 })
 
-module.exports = function ExampleComponent(whom) {
-  return template(whom);
+module.exports = function ExampleComponent(props) {
+  return template(props.whom);
 };
 ```
 
