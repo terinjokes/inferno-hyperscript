@@ -36,7 +36,7 @@
     "inferno-server": "^0.5.18",
     "nyc": "^5.3.0",
     "semantic-release": "^4.3.5",
-    "xo": "^0.12.1"
+    "xo": "^0.13.0"
   },
   "xo": {
     "space": true
