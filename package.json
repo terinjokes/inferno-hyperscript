@@ -3,7 +3,7 @@
   "description": "Bridging hyperscript to InfernoJS",
   "main": "index.js",
   "scripts": {
-    "test": "xo && nyc --reporter=lcov -- ava tests/**/*.js",
+    "test": "xo && nyc --reporter=lcov -- ava",
     "coverage": "cat ./coverage/lcov.info | coveralls",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
@@ -45,6 +45,11 @@
   "nyc": {
     "exclude": [
       "tests"
+    ]
+  },
+  "ava": {
+    "files": [
+      "tests/*.js"
     ]
   }
 }

@@ -211,7 +211,7 @@ test('a tag with a number as the third argument', function () {
   end();
 });
 
-test.skip('a tag with a `0` as the second argument', function () {
+test.skip('a tag with a `0` as the second argument', function () { // eslint-disable-line ava/no-skip-test
   var end = expect.plan(3);
 
   var t = h('h1', 0);
