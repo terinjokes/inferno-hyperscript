@@ -1,467 +1,283 @@
 'use strict';
-var h = require('..');
-var InfernoServer = require('inferno-server');
-var test = require('ava');
-var expect = require('assume');
+const h = require('..');
+const Inferno = require('inferno');
+const InfernoServer = require('inferno-server');
+const assign = require('lodash/fp/assign');
+const test = require('ava');
 
-test('an html tag', function () {
-  var end = expect.plan(3);
+const createVNode = assign(Inferno.createVNode());
 
-  var t = h('h1');
-  expect(t).eqls({
-    dom: null,
-    tag: 'H1',
-    key: null,
-    attrs: null,
-    events: null,
-    hooks: null,
-    className: null,
-    style: null,
-    children: undefined,
-    instance: null
-  });
+test('an html tag', t => {
+  let hnode = h('h1');
+  t.deepEqual(hnode, createVNode({
+    tag: 'H1'
+  }));
 
-  var domString = InfernoServer.renderToString(t);
+  let domString = InfernoServer.renderToString(hnode);
 
-  expect(domString).is.a('string');
-  expect(domString).equals('<H1></H1>');
-  end();
+  t.true(typeof domString === 'string');
+  t.true(domString === '<H1></H1>');
 });
 
-test('a tag with an id and classes in the selector', function () {
-  var end = expect.plan(3);
-
-  var t = h('h1#boom.whatever.foo');
-  expect(t).eqls({
-    dom: null,
+test('a tag with an id and classes in the selector', t => {
+  let hnode = h('h1#boom.whatever.foo');
+  t.deepEqual(hnode, createVNode({
     tag: 'H1',
-    key: null,
     attrs: {
       id: 'boom'
     },
-    events: null,
-    hooks: null,
-    className: 'whatever foo',
-    style: null,
-    children: undefined,
-    instance: null
-  });
+    className: 'whatever foo'
+  }));
 
-  var domString = InfernoServer.renderToString(t);
+  let domString = InfernoServer.renderToString(hnode);
 
-  expect(domString).is.a('string');
-  expect(domString).equals('<H1 class="whatever foo" id="boom"></H1>');
-
-  end();
+  t.true(typeof domString === 'string');
+  t.true(domString === '<H1 class="whatever foo" id="boom"></H1>');
 });
 
-test('a tag with classes in the selector and props', function () {
-  var end = expect.plan(3);
-
-  var t = h('h1.foo', {
+test('a tag with classes in the selector and props', t => {
+  let hnode = h('h1.foo', {
     className: 'bar'
   });
-  expect(t).eqls({
-    dom: null,
+  t.deepEqual(hnode, createVNode({
     tag: 'H1',
-    key: null,
-    attrs: null,
-    events: null,
-    hooks: null,
-    className: 'foo bar',
-    style: null,
-    children: undefined,
-    instance: null
-  });
+    className: 'foo bar'
+  }));
 
-  var domString = InfernoServer.renderToString(t);
+  let domString = InfernoServer.renderToString(hnode);
 
-  expect(domString).is.a('string');
-  expect(domString).equals('<H1 class="foo bar"></H1>');
-
-  end();
+  t.true(typeof domString === 'string');
+  t.true(domString === '<H1 class="foo bar"></H1>');
 });
 
-test('a tag with other properties', function () {
-  var end = expect.plan(3);
-
-  var t = h('a', {
+test('a tag with other properties', t => {
+  let hnode = h('a', {
     href: 'http://www.google.com'
   });
-  expect(t).eqls({
-    dom: null,
+  t.deepEqual(hnode, createVNode({
     tag: 'A',
-    key: null,
     attrs: {
       href: 'http://www.google.com'
-    },
-    events: null,
-    hooks: null,
-    className: null,
-    style: null,
-    children: undefined,
-    instance: null
-  });
+    }
+  }));
 
-  var domString = InfernoServer.renderToString(t);
+  let domString = InfernoServer.renderToString(hnode);
 
-  expect(domString).is.a('string');
-  expect(domString).equals('<A href="http://www.google.com"></A>');
-
-  end();
+  t.true(typeof domString === 'string');
+  t.true(domString === '<A href="http://www.google.com"></A>');
 });
 
-test('a tag with a string as the third argument', function () {
-  var end = expect.plan(3);
-
-  var t = h('h1', null, 'Hello World!');
-  expect(t).eqls({
-    dom: null,
+test('a tag with a string as the third argument', t => {
+  let hnode = h('h1', null, 'Hello World!');
+  t.deepEqual(hnode, createVNode({
     tag: 'H1',
-    key: null,
-    attrs: null,
-    events: null,
-    hooks: null,
-    className: null,
-    style: null,
-    children: 'Hello World!',
-    instance: null
-  });
+    children: 'Hello World!'
+  }));
 
-  var domString = InfernoServer.renderToString(t);
+  let domString = InfernoServer.renderToString(hnode);
 
-  expect(domString).is.a('string');
-  expect(domString).equals('<H1>Hello World!</H1>');
-
-  end();
+  t.true(typeof domString === 'string');
+  t.true(domString === '<H1>Hello World!</H1>');
 });
 
-test('a tag with a string as the second argument', function () {
-  var end = expect.plan(3);
-
-  var t = h('h1', 'Hello World!');
-  expect(t).eqls({
-    dom: null,
+test('a tag with a string as the second argument', t => {
+  let hnode = h('h1', 'Hello World!');
+  t.deepEqual(hnode, createVNode({
     tag: 'H1',
-    key: null,
-    attrs: null,
-    events: null,
-    hooks: null,
-    className: null,
-    style: null,
-    children: 'Hello World!',
-    instance: null
-  });
+    children: 'Hello World!'
+  }));
 
-  var domString = InfernoServer.renderToString(t);
+  let domString = InfernoServer.renderToString(hnode);
 
-  expect(domString).is.a('string');
-  expect(domString).equals('<H1>Hello World!</H1>');
-
-  end();
+  t.true(typeof domString === 'string');
+  t.true(domString === '<H1>Hello World!</H1>');
 });
 
-test('a tag with a number as the second argument', function () {
-  var end = expect.plan(3);
-
-  var t = h('h1', 5);
-  expect(t).eqls({
-    dom: null,
+test('a tag with a number as the second argument', t => {
+  let hnode = h('h1', 5);
+  t.deepEqual(hnode, createVNode({
     tag: 'H1',
-    key: null,
-    attrs: null,
-    events: null,
-    hooks: null,
-    className: null,
-    style: null,
-    children: 5,
-    instance: null
-  });
+    children: 5
+  }));
 
-  var domString = InfernoServer.renderToString(t);
+  let domString = InfernoServer.renderToString(hnode);
 
-  expect(domString).is.a('string');
-  expect(domString).equals('<H1>5</H1>');
-
-  end();
+  t.true(typeof domString === 'string');
+  t.true(domString === '<H1>5</H1>');
 });
 
-test('a tag with a number as the third argument', function () {
-  var end = expect.plan(3);
-
-  var t = h('h1', null, 5);
-  expect(t).eqls({
-    dom: null,
+test('a tag with a number as the third argument', t => {
+  let hnode = h('h1', null, 5);
+  t.deepEqual(hnode, createVNode({
     tag: 'H1',
-    key: null,
-    attrs: null,
-    events: null,
-    hooks: null,
-    className: null,
-    style: null,
-    children: 5,
-    instance: null
-  });
+    children: 5
+  }));
 
-  var domString = InfernoServer.renderToString(t);
+  let domString = InfernoServer.renderToString(hnode);
 
-  expect(domString).is.a('string');
-  expect(domString).equals('<H1>5</H1>');
-
-  end();
+  t.true(typeof domString === 'string');
+  t.true(domString === '<H1>5</H1>');
 });
 
-test.skip('a tag with a `0` as the second argument', function () { // eslint-disable-line ava/no-skip-test
-  var end = expect.plan(3);
-
-  var t = h('h1', 0);
-  expect(t).eqls({
-    dom: null,
+test.skip('a tag with a `0` as the second argument', t => { // eslint-disable-line
+  let hnode = h('h1', 0);
+  t.deepEqual(hnode, createVNode({
     tag: 'H1',
-    key: null,
-    attrs: null,
-    events: null,
-    hooks: null,
-    className: null,
-    style: null,
-    children: 0,
-    instance: null
-  });
+    children: 0
+  }));
 
-  var domString = InfernoServer.renderToString(t);
+  let domString = InfernoServer.renderToString(hnode);
 
-  expect(domString).is.a('string');
-  expect(domString).equals('<H1>0</H1>');
-
-  end();
+  t.true(typeof domString === 'string');
+  t.true(domString === '<H1>0</H1>');
 });
 
-test('a tag with a children array as the third argument', function () {
-  var end = expect.plan(3);
-
-  var t = h('h1', null, [
+test('a tag with a children array as the third argument', t => {
+  let hnode = h('h1', null, [
     h('span'),
     h('span')
   ]);
-  expect(t).eqls({
-    dom: null,
+  t.deepEqual(hnode, createVNode({
     tag: 'H1',
-    key: null,
-    attrs: null,
-    events: null,
-    hooks: null,
-    className: null,
-    style: null,
     children: [
-      {
-        dom: null,
-        tag: 'SPAN',
-        key: null,
-        attrs: null,
-        events: null,
-        hooks: null,
-        className: null,
-        style: null,
-        children: undefined,
-        instance: null
-      },
-      {
-        dom: null,
-        tag: 'SPAN',
-        key: null,
-        attrs: null,
-        events: null,
-        hooks: null,
-        className: null,
-        style: null,
-        children: undefined,
-        instance: null
-      }
-    ],
-    instance: null
-  });
+      createVNode({
+        tag: 'SPAN'
+      }),
+      createVNode({
+        tag: 'SPAN'
+      })
+    ]
+  }));
 
-  var domString = InfernoServer.renderToString(t);
+  let domString = InfernoServer.renderToString(hnode);
 
-  expect(domString).is.a('string');
-  expect(domString).equals('<H1><SPAN></SPAN><SPAN></SPAN></H1>');
-
-  end();
+  t.true(typeof domString === 'string');
+  t.true(domString === '<H1><SPAN></SPAN><SPAN></SPAN></H1>');
 });
 
-test('a tag with a children array as the second argument', function () {
-  var end = expect.plan(3);
-
-  var t = h('h1', [
+test('a tag with a children array as the second argument', t => {
+  let hnode = h('h1', [
     h('span'),
     h('span')
   ]);
-  expect(t).eqls({
-    dom: null,
+  t.deepEqual(hnode, createVNode({
     tag: 'H1',
-    key: null,
-    attrs: null,
-    events: null,
-    hooks: null,
-    className: null,
-    style: null,
     children: [
-      {
-        dom: null,
-        tag: 'SPAN',
-        key: null,
-        attrs: null,
-        events: null,
-        hooks: null,
-        className: null,
-        style: null,
-        children: undefined,
-        instance: null
-      },
-      {
-        dom: null,
-        tag: 'SPAN',
-        key: null,
-        attrs: null,
-        events: null,
-        hooks: null,
-        className: null,
-        style: null,
-        children: undefined,
-        instance: null
-      }
-    ],
-    instance: null
-  });
+      createVNode({
+        tag: 'SPAN'
+      }),
+      createVNode({
+        tag: 'SPAN'
+      })
+    ]
+  }));
 
-  var domString = InfernoServer.renderToString(t);
+  let domString = InfernoServer.renderToString(hnode);
 
-  expect(domString).is.a('string');
-  expect(domString).equals('<H1><SPAN></SPAN><SPAN></SPAN></H1>');
-
-  end();
+  t.true(typeof domString === 'string');
+  t.true(domString === '<H1><SPAN></SPAN><SPAN></SPAN></H1>');
 });
 
-test('a tag with key', function () {
-  var end = expect.plan(3);
-
-  var t = h('h1', {
+test('a tag with key', t => {
+  let hnode = h('h1', {
     key: 'foobar'
   }, 'Hello World!');
-  expect(t).eqls({
-    dom: null,
+  t.deepEqual(hnode, createVNode({
     tag: 'H1',
     key: 'foobar',
-    attrs: null,
-    events: null,
-    hooks: null,
-    className: null,
-    style: null,
-    children: 'Hello World!',
-    instance: null
-  });
+    children: 'Hello World!'
+  }));
 
-  var domString = InfernoServer.renderToString(t);
+  let domString = InfernoServer.renderToString(hnode);
 
-  expect(domString).is.a('string');
-  expect(domString).equals('<H1>Hello World!</H1>');
-
-  end();
+  t.true(typeof domString === 'string');
+  t.true(domString === '<H1>Hello World!</H1>');
 });
 
-test('a tag with an event', function () {
-  var end = expect.plan(3);
-
+test('a tag with an event', t => {
   function onHover() {
 
   }
 
-  var t = h('h1', {
+  let hnode = h('h1', {
     onHover: onHover
   }, 'Hello World!');
-  expect(t).eqls({
-    dom: null,
+  t.deepEqual(hnode, createVNode({
     tag: 'H1',
-    key: null,
-    attrs: null,
     events: {
       hover: onHover
     },
-    hooks: null,
-    className: null,
-    style: null,
-    children: 'Hello World!',
-    instance: null
-  });
+    children: 'Hello World!'
+  }));
 
-  var domString = InfernoServer.renderToString(t);
+  let domString = InfernoServer.renderToString(hnode);
 
-  expect(domString).is.a('string');
-  expect(domString).equals('<H1>Hello World!</H1>');
-
-  end();
+  t.true(typeof domString === 'string');
+  t.true(domString === '<H1>Hello World!</H1>');
 });
 
-test('a tag with a hook', function () {
-  var end = expect.plan(3);
-
+test('a tag with a hook', t => {
   function onCreated() {
 
   }
 
-  var t = h('h1', {
+  let hnode = h('h1', {
     onCreated: onCreated
   }, 'Hello World!');
-  expect(t).eqls({
-    dom: null,
+  t.deepEqual(hnode, createVNode({
     tag: 'H1',
-    key: null,
-    attrs: null,
-    events: null,
     hooks: {
       created: onCreated
     },
-    className: null,
-    style: null,
-    children: 'Hello World!',
-    instance: null
-  });
+    children: 'Hello World!'
+  }));
 
-  var domString = InfernoServer.renderToString(t);
+  let domString = InfernoServer.renderToString(hnode);
 
-  expect(domString).is.a('string');
-  expect(domString).equals('<H1>Hello World!</H1>');
-
-  end();
+  t.true(typeof domString === 'string');
+  t.true(domString === '<H1>Hello World!</H1>');
 });
 
-test('a tag with style', function () {
-  var end = expect.plan(3);
-
-  var t = h('h1', {
+test('a tag with style', t => {
+  let hnode = h('h1', {
     style: {
       color: '#FFF'
     }
   }, 'Hello World!');
-  expect(t).eqls({
-    dom: null,
+  t.deepEqual(hnode, createVNode({
     tag: 'H1',
-    key: null,
-    attrs: null,
-    events: null,
-    hooks: null,
-    className: null,
     style: {
       color: '#FFF'
     },
-    children: 'Hello World!',
-    instance: null
+    children: 'Hello World!'
+  }));
+
+  let domString = InfernoServer.renderToString(hnode);
+
+  t.true(typeof domString === 'string');
+  t.true(domString === '<H1>Hello World!</H1>');
+});
+
+test('a basic Component', t => {
+  function Component(place) {
+    return h('div.example', `Hello ${place}!`);
+  }
+
+  function DidUpdate() {
+
+  }
+
+  let hnode = h(Component, {
+    place: "world",
+    onComponentDidUpdate: DidUpdate
   });
-
-  var domString = InfernoServer.renderToString(t);
-
-  expect(domString).is.a('string');
-  expect(domString).equals('<H1>Hello World!</H1>');
-
-  end();
+  t.deepEqual(hnode, createVNode({
+    tag: Component,
+    attrs: {
+      place: "world"
+    },
+    hooks: {
+      componentDidUpdate: DidUpdate
+    }
+  }));
 });
