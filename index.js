@@ -67,7 +67,7 @@ function extractFromProps(props, tag, children) {
         acc.events = {};
       }
 
-      acc.events[k.substring(2).toLowerCase()] = v;
+      acc.events[k.toLowerCase()] = v;
     } else if (isComponentHook(k) && isFunction(tag)) {
       if (!acc.hooks) {
         acc.hooks = {};

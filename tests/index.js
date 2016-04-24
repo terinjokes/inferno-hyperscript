@@ -119,7 +119,7 @@ test('a tag with a number as the third argument', t => {
   t.true(domString === '<H1>5</H1>');
 });
 
-test.skip('a tag with a `0` as the second argument', t => { // eslint-disable-line
+test('a tag with a `0` as the second argument', t => {
   let hnode = h('h1', 0);
   t.deepEqual(hnode, createVNode({
     tag: 'H1',
@@ -205,7 +205,7 @@ test('a tag with an event', t => {
   t.deepEqual(hnode, createVNode({
     tag: 'H1',
     events: {
-      hover: onHover
+      onhover: onHover
     },
     children: 'Hello World!'
   }));
