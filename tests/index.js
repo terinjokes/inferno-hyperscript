@@ -268,13 +268,13 @@ test('a basic Component', t => {
   }
 
   let hnode = h(Component, {
-    place: "world",
+    place: 'world',
     onComponentDidUpdate: DidUpdate
   });
   t.deepEqual(hnode, createVNode({
     tag: Component,
     attrs: {
-      place: "world"
+      place: 'world'
     },
     hooks: {
       componentDidUpdate: DidUpdate

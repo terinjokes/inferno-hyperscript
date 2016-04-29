@@ -36,7 +36,7 @@ module.exports = function (tag, properties, children) {
   }
 
   properties = properties || {};
-  children = typeof children === "undefined" ? null : children;
+  children = typeof children === 'undefined' ? null : children;
 
   // When a selector, parse the tag name and fill out the properties object
   if (typeof tag === 'string') {
