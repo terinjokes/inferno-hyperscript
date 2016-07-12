@@ -255,7 +255,7 @@ test('a tag with style', t => {
   let domString = InfernoServer.renderToString(hnode);
 
   t.true(typeof domString === 'string');
-  t.true(domString === '<H1>Hello World!</H1>');
+  t.true(domString === '<H1 style="color:#FFF;">Hello World!</H1>');
 });
 
 test('a basic Component', t => {
