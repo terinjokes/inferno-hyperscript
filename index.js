@@ -48,6 +48,10 @@ module.exports = function (tag, properties, children) {
   return createVNode(extracted);
 };
 
+function getEventFromHook(hook) {
+  return hook.charAt(2).toLowerCase() + hook.substring(3);
+}
+
 function extractFromProps(props, tag, children) {
   return transform.convert({cap: false})(function (acc, v, k) {
     if (k === 'className') {
@@ -60,8 +64,7 @@ function extractFromProps(props, tag, children) {
       if (!acc.hooks) {
         acc.hooks = {};
       }
-
-      acc.hooks[k.substring(2).toLowerCase()] = v;
+      acc.hooks[getEventFromHook(k)] = v;
     } else if (isEvent(k) && !isFunction(tag)) {
       if (!acc.events) {
         acc.events = {};
