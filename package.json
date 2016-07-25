@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "ava": "^0.15.0",
-    "coveralls": "^2.11.6",
+    "coveralls": "^2.11.10",
     "inferno-server": "^0.7.3",
     "nyc": "^7.1.0",
     "semantic-release": "^4.3.5",
