@@ -26,7 +26,7 @@
   ],
   "homepage": "https://github.com/terinjokes/inferno-hyperscript#readme",
   "dependencies": {
-    "inferno": "^0.7.3",
+    "inferno": "^1.0.3",
     "lodash": "^4.11.1",
     "virtual-dom": "^2.1.1"
   },
