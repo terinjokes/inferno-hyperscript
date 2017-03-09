@@ -1,4 +1,6 @@
 # inferno-hyperscript [![Travis-CI Status](https://img.shields.io/travis/terinjokes/inferno-hyperscript/master.svg?label=Travis%20CI&style=flat-square)](https://travis-ci.org/terinjokes/inferno-hyperscript) [![](https://img.shields.io/npm/dm/inferno-hyperscript.svg?style=flat-square)](https://www.npmjs.org/package/inferno-hyperscript) [![](https://img.shields.io/npm/v/inferno-hyperscript.svg?style=flat-square)](https://www.npmjs.org/package/inferno-hyperscript) [![](https://img.shields.io/coveralls/terinjokes/inferno-hyperscript/master.svg?style=flat-square)](https://coveralls.io/github/terinjokes/inferno-hyperscript)
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/terinjokes/inferno-hyperscript.svg)](https://greenkeeper.io/)
 > [Hyperscript][hyperscript] syntax for [Inferno][inferno] termplates.
 
 ## Usage
