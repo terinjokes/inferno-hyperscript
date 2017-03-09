@@ -26,17 +26,17 @@
   ],
   "homepage": "https://github.com/terinjokes/inferno-hyperscript#readme",
   "dependencies": {
-    "inferno": "^0.7.3",
+    "inferno": "^1.2.2",
     "lodash": "^4.11.1",
     "virtual-dom": "^2.1.1"
   },
   "devDependencies": {
-    "ava": "^0.16.0",
+    "ava": "^0.18.2",
     "coveralls": "^2.11.6",
-    "inferno-server": "^0.7.3",
-    "nyc": "^8.0.0",
-    "semantic-release": "^4.3.5",
-    "xo": "^0.16.0"
+    "inferno-server": "^1.2.2",
+    "nyc": "^10.1.2",
+    "semantic-release": "^6.3.2",
+    "xo": "^0.17.1"
   },
   "xo": {
     "space": true
